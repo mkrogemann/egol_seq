@@ -1,5 +1,4 @@
 -module (rules).
--include_lib ("eunit/include/eunit.hrl").
 
 -export ([evaluate/2]).
 
