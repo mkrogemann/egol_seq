@@ -13,7 +13,7 @@
 %%
 evolve(Grid) ->
   dict:map(fun(K,V) ->
-    rules:evaluate(neighbors(K), alive(V)) end, Grid).
+    rules:evaluate(neighbors(K, Grid), alive(V)) end, Grid).
 
 %%
 %%
@@ -24,7 +24,7 @@ alive(_) -> false.
 %%
 %%
 %%
-neighbors(K) ->
+neighbors(K, Grid) ->
   % K is a point (tuple)
   2.
 
