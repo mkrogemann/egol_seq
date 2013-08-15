@@ -5,4 +5,4 @@
               {applications,[kernel,stdlib]},
               {mod,{erlgol_app,[]}},
               {env,[]},
-              {modules,[erlgol_app,erlgol_sup,rules]}]}.
+              {modules,[erlgol_app,erlgol_sup,game,rules]}]}.
