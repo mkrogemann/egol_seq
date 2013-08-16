@@ -15,6 +15,7 @@ evolve(Grid) ->
   dict:map(fun(K,V) ->
     rules:evaluate(neighbors(K, Grid), alive(V)) end, Grid).
 
+
 %%--------------------------------------------------------------------
 %% @doc
 %% alive takes one argument which represents a Cell's status
@@ -25,9 +26,15 @@ evolve(Grid) ->
 alive(Status) when Status =:= 1 -> true;
 alive(_) -> false.
 
-%%
-%%
-%%
+
+%%--------------------------------------------------------------------
+%% @doc
+%% neighbors takes two arguments:
+%% 1) the cell for which to find the living neighbors (a tuple of X,Y)
+%% 2) the grid in which to the the neighbors
+%% @spec neighbors( { integer(), integer() }, dict ) -> integer()
+%% @end
+%%--------------------------------------------------------------------
 neighbors(Cell, Grid) ->
   {X,Y} = Cell,
   lists:sum(
