@@ -10,6 +10,6 @@
 %% @spec evaluate( integer(), true | false ) -> true | false
 %% @end
 %%--------------------------------------------------------------------
-evaluate(2, true) -> true;
-evaluate(3, _) -> true;
-evaluate(_, _) -> false.
+evaluate(2, true) -> 1;
+evaluate(3, _) -> 0;
+evaluate(_, _) -> 0.
