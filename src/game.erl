@@ -1,5 +1,6 @@
 -module (game).
 
+-export ([init/1]).
 -export ([evolve/1]).
 
 %% Export all functions for unit tests
@@ -7,6 +8,19 @@
 -compile(export_all).
 -endif.
 
+%%--------------------------------------------------------------------
+%% @doc
+%% init takes one List argument which represents the Grid's status
+%% ...TBD
+%% @spec ...TBD
+%% @end
+%%--------------------------------------------------------------------
+init(L) ->
+  Dict = dict:from_list(L),
+  Points = dict:fetch_keys(Dict),
+  XCoords = [X || {X,_} <- Points],
+  YCoords = [Y || {_,Y} <- Points],
+  [Dict, lists:max(XCoords), lists:max(YCoords)].
 
 %%
 %%
@@ -52,5 +66,6 @@ neighbors(Cell, Grid) ->
 %% @end
 %%--------------------------------------------------------------------
 state(Cell, Grid) ->
+  % X,Y = Cell,
   {ok,Value} = dict:find(Cell, Grid),
   Value.

@@ -1,6 +1,14 @@
 -module (game_tests).
 -include_lib ("eunit/include/eunit.hrl").
 
+init_test() ->
+  Dict = dict:from_list([{{1,1},1},{{1,2},0},{{1,3},0},{{2,1},1},{{2,2},1},{{2,3},0}]),
+  [Grid, Width, Height] = game:init([{{1,1},1},{{1,2},0},{{1,3},0},{{2,1},1},{{2,2},1},{{2,3},0}]),
+  ?assertEqual(Dict, Grid),
+  ?assertEqual(2, Width),
+  ?assertEqual(3, Height).
+
+
 alive_test() ->
   ?assert(game:alive(1)),
   ?assertNot(game:alive(0)).
