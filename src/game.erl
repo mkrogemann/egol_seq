@@ -10,9 +10,15 @@
 
 %%--------------------------------------------------------------------
 %% @doc
-%% init takes one List argument which represents the Grid's status
-%% TBD
+%% init takes one List argument which represents the Game's state.
+%% From this list it constructs the Game's Board plus some meta
+%% information, namely Width and Height of the Game's Board.
+%% @spec init(List) -> GameBoard
+%%       List = [ {{ integer(), integer() }, integer() } ]
+%%       GameBoard = []
+%% @TODO Document GameBoard
 %% @end
+%% information, namely the Board's Width and Height
 %%--------------------------------------------------------------------
 init(L) ->
   Grid = dict:from_list(L),
@@ -61,7 +67,7 @@ neighbors(Cell, Grid) ->
 %% state takes two arguments:
 %% 1) the cell to find (a tuple of X,Y coordinates)
 %% 2) the grid in which to find the cell
-%% @spec alive( { integer(), integer() }, dict ) -> 1 | 0
+%% @spec state( { integer(), integer() }, dict ) -> 1 | 0
 %% @end
 %%--------------------------------------------------------------------
 state(Cell, Grid) ->
