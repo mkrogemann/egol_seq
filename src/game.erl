@@ -13,10 +13,10 @@
 %% init takes one List argument which represents the Game's state.
 %% From this list it constructs the Game's Board plus some meta
 %% information, namely Width and Height of the Game's Board.
-%% @spec init(List) -> GameBoard
+%% @spec init(List) -> Board
 %%       List = [ {{ integer(), integer() }, integer() } ]
-%%       GameBoard = []
-%% @TODO Document GameBoard
+%%       Board = []
+%% @TODO Document Board once I grasp EDoc
 %% @end
 %% information, namely the Board's Width and Height
 %%--------------------------------------------------------------------
@@ -25,7 +25,8 @@ init(L) ->
   Points = dict:fetch_keys(Grid),
   XCoords = [X || {X,_} <- Points],
   YCoords = [Y || {_,Y} <- Points],
-  [Grid, lists:max(XCoords), lists:max(YCoords)].
+  Board = {Grid, lists:max(XCoords), lists:max(YCoords)},
+  Board.
 
 %%
 %%
@@ -54,12 +55,12 @@ alive(_) -> false.
 %% @spec neighbors( { integer(), integer() }, dict ) -> integer()
 %% @end
 %%--------------------------------------------------------------------
-neighbors(Cell, Grid) ->
+neighbors(Cell, Board) ->
   {X,Y} = Cell,
   lists:sum(
-    [state({X-1,Y-1}, Grid), state({X-1,Y}, Grid), state({X-1,Y+1}, Grid),
-     state({X,Y-1}, Grid), state({X,Y+1}, Grid),
-     state({X+1,Y-1}, Grid), state({X+1,Y}, Grid), state({X+1,Y+1}, Grid)]).
+    [state({X-1,Y-1}, Board), state({X-1,Y}, Board), state({X-1,Y+1}, Board),
+     state({X,Y-1}, Board), state({X,Y+1}, Board),
+     state({X+1,Y-1}, Board), state({X+1,Y}, Board), state({X+1,Y+1}, Board)]).
 
 
 %%--------------------------------------------------------------------
@@ -70,7 +71,21 @@ neighbors(Cell, Grid) ->
 %% @spec state( { integer(), integer() }, dict ) -> 1 | 0
 %% @end
 %%--------------------------------------------------------------------
-state(Cell, Grid) ->
-  % X,Y = Cell,
-  {ok,Value} = dict:find(Cell, Grid),
+state(Cell, Board) ->
+  {Grid,_,_} = Board,
+  {X,Y} = wrap_if_required(Cell, Board),
+  {ok,Value} = dict:find({X,Y}, Grid),
   Value.
+
+wrap_if_required(Cell, Board) ->
+  {X,Y} = Cell,
+  {_,Width,Height} = Board,
+  XWrapped = if X > Width -> 1
+    ; X < 1 -> Width
+    ; true -> X
+  end,
+  YWrapped = if Y > Height -> 1
+    ; Y < 1 -> Height
+    ; true -> Y
+  end,
+  {XWrapped,YWrapped}.
