@@ -11,16 +11,15 @@
 %%--------------------------------------------------------------------
 %% @doc
 %% init takes one List argument which represents the Grid's status
-%% ...TBD
-%% @spec ...TBD
+%% TBD
 %% @end
 %%--------------------------------------------------------------------
 init(L) ->
-  Dict = dict:from_list(L),
-  Points = dict:fetch_keys(Dict),
+  Grid = dict:from_list(L),
+  Points = dict:fetch_keys(Grid),
   XCoords = [X || {X,_} <- Points],
   YCoords = [Y || {_,Y} <- Points],
-  [Dict, lists:max(XCoords), lists:max(YCoords)].
+  [Grid, lists:max(XCoords), lists:max(YCoords)].
 
 %%
 %%
