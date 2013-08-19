@@ -41,17 +41,6 @@ evolve(Board) ->
 
 %%--------------------------------------------------------------------
 %% @doc
-%% alive takes one argument which represents a Cell's status
-%% A value of 1 means alive, everything else means not alive
-%% @spec alive( integer() ) -> true | false
-%% @end
-%%--------------------------------------------------------------------
-alive(Status) when Status =:= 1 -> true;
-alive(_) -> false.
-
-
-%%--------------------------------------------------------------------
-%% @doc
 %% neighbors takes two arguments:
 %% 1) the cell for which to find the living neighbors (a tuple of X,Y)
 %% 2) the grid in which to the the neighbors

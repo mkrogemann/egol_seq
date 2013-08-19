@@ -28,11 +28,6 @@ evolve_test() ->
   ?assertEqual(ExpectedGrid, ActualGrid).
 
 
-alive_test() ->
-  ?assert(game:alive(1)),
-  ?assertNot(game:alive(0)).
-
-
 neighbors_test() ->
   Board = game:init([ {{1,1},1}, {{2,1},0}, {{3,1},1}, {{4,1},0},
                       {{1,2},0}, {{2,2},1}, {{3,2},1}, {{4,2},0},
