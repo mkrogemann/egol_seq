@@ -28,12 +28,15 @@ init(L) ->
   Board = {Grid, lists:max(XCoords), lists:max(YCoords)},
   Board.
 
+
 %%
 %%
 %%
-evolve(Grid) ->
-  dict:map(fun(K,V) ->
-    rules:evaluate(neighbors(K, Grid), alive(V)) end, Grid).
+evolve(Board) ->
+  {Grid,Width,Height} = Board,
+  NewGrid = dict:map(fun(K,V) ->
+    rules:evaluate(neighbors(K, Board), V) end, Grid),
+  {NewGrid,Width,Height}.
 
 
 %%--------------------------------------------------------------------
@@ -76,6 +79,7 @@ state(Cell, Board) ->
   {X,Y} = wrap_if_required(Cell, Board),
   {ok,Value} = dict:find({X,Y}, Grid),
   Value.
+
 
 wrap_if_required(Cell, Board) ->
   {X,Y} = Cell,
