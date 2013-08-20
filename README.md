@@ -15,3 +15,4 @@ What's next?
 * Alternative data structures (gb_tree, bit vector, ...)
 * Benchmarking
 * More tools (dializer, ...)
+* Concurrency (cell = actor?)
