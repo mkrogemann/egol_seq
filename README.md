@@ -12,3 +12,6 @@ What's next?
 * Convert into an OTP application
 * Read from file system
 * Print game state to console
+* Alternative data structures (gb_tree, bit vector, ...)
+* Benchmarking
+* More tools (dializer, ...)
