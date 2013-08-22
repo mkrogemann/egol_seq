@@ -1,4 +1,4 @@
--module (game).
+-module (egol_game).
 
 -export ([init/1]).
 -export ([evolve/1]).
@@ -38,7 +38,7 @@ init(L) ->
 evolve(Board) ->
   {Grid,Width,Height} = Board,
   NewGrid = dict:map(fun(K,V) ->
-    rules:evaluate(neighbors(K, Board), V) end, Grid),
+    egol_rules:evaluate(neighbors(K, Board), V) end, Grid),
   {NewGrid,Width,Height}.
 
 

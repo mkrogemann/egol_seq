@@ -1,4 +1,4 @@
--module (game_tests).
+-module (egol_game_tests).
 -include_lib ("eunit/include/eunit.hrl").
 
 
@@ -6,7 +6,7 @@ init_test() ->
   ExpectedGrid = dict:from_list([ {{1,1},1},{{2,1},0},{{3,1},0},
                                   {{1,2},1},{{2,2},1},{{3,2},0} ]),
   {ActualGrid, Width, Height} =
-              game:init([ {{1,1},1},{{2,1},0},{{3,1},0},
+              egol_game:init([ {{1,1},1},{{2,1},0},{{3,1},0},
                           {{1,2},1},{{2,2},1},{{3,2},0} ]),
 
   ?assertEqual(ExpectedGrid, ActualGrid),
@@ -15,7 +15,7 @@ init_test() ->
 
 
 evolve_test() ->
-  Board = game:init([ {{1,1},1}, {{2,1},0}, {{3,1},1}, {{4,1},0},
+  Board = egol_game:init([ {{1,1},1}, {{2,1},0}, {{3,1},1}, {{4,1},0},
                       {{1,2},0}, {{2,2},1}, {{3,2},1}, {{4,2},0},
                       {{1,3},0}, {{2,3},0}, {{3,3},1}, {{4,3},0},
                       {{1,4},1}, {{2,4},0}, {{3,4},1}, {{4,4},0} ]),
@@ -24,7 +24,7 @@ evolve_test() ->
                                   {{1,2},0}, {{2,2},0}, {{3,2},1}, {{4,2},0},
                                   {{1,3},0}, {{2,3},0}, {{3,3},1}, {{4,3},0},
                                   {{1,4},0}, {{2,4},0}, {{3,4},1}, {{4,4},0} ]),
-  {ActualGrid,_,_} = game:evolve(Board),
+  {ActualGrid,_,_} = egol_game:evolve(Board),
   ?assertEqual(ExpectedGrid, ActualGrid).
 
 
@@ -41,16 +41,16 @@ evolve_test() ->
 %% @end
 %%----------------------------------------------------------------------------
 evolve_glider_test() ->
-  FirstGeneration = game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0},
+  FirstGeneration = egol_game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0},
                                 {{1,2},0}, {{2,2},0}, {{3,2},1}, {{4,2},0}, {{5,2},0},
                                 {{1,3},1}, {{2,3},0}, {{3,3},1}, {{4,3},0}, {{5,3},0},
                                 {{1,4},0}, {{2,4},1}, {{3,4},1}, {{4,4},0}, {{5,4},0},
                                 {{1,5},0}, {{2,5},0}, {{3,5},0}, {{4,5},0}, {{5,5},0} ]),
 
-  SecondGeneration = game:evolve(FirstGeneration),
-  ThirdGeneration = game:evolve(SecondGeneration),
-  FourthGeneration = game:evolve(ThirdGeneration),
-  FifthGeneration = game:evolve(FourthGeneration),
+  SecondGeneration = egol_game:evolve(FirstGeneration),
+  ThirdGeneration = egol_game:evolve(SecondGeneration),
+  FourthGeneration = egol_game:evolve(ThirdGeneration),
+  FifthGeneration = egol_game:evolve(FourthGeneration),
 
   ExpectedSecondGrid = dict:from_list([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0},
                                         {{1,2},0}, {{2,2},1}, {{3,2},0}, {{4,2},0}, {{5,2},0},
@@ -102,7 +102,7 @@ evolve_glider_test() ->
 %% @end
 %%----------------------------------------------------------------------------
 evolve_beehive_test() ->
-  FirstGeneration = game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0}, {{6,1},0},
+  FirstGeneration = egol_game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0}, {{6,1},0},
                                 {{1,2},0}, {{2,2},0}, {{3,2},1}, {{4,2},1}, {{5,2},0}, {{6,2},0},
                                 {{1,3},0}, {{2,3},1}, {{3,3},0}, {{4,3},0}, {{5,3},1}, {{6,3},0},
                                 {{1,4},0}, {{2,4},0}, {{3,4},1}, {{4,4},1}, {{5,4},0}, {{6,4},0},
@@ -115,7 +115,7 @@ evolve_beehive_test() ->
                                 {{1,4},0}, {{2,4},0}, {{3,4},1}, {{4,4},1}, {{5,4},0}, {{6,4},0},
                                 {{1,5},0}, {{2,5},0}, {{3,5},0}, {{4,5},0}, {{5,5},0}, {{6,5},0} ]),
 
-  {ActualSecondGrid,_,_} = game:evolve(FirstGeneration),
+  {ActualSecondGrid,_,_} = egol_game:evolve(FirstGeneration),
   ?assertEqual(ExpectedSecondGrid, ActualSecondGrid).
 
 
@@ -132,7 +132,7 @@ evolve_beehive_test() ->
 %% @end
 %%----------------------------------------------------------------------------
 evolve_blinker_test() ->
-  FirstGeneration = game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0},
+  FirstGeneration = egol_game:init([ {{1,1},0}, {{2,1},0}, {{3,1},0}, {{4,1},0}, {{5,1},0},
                                 {{1,2},0}, {{2,2},0}, {{3,2},1}, {{4,2},0}, {{5,2},0},
                                 {{1,3},0}, {{2,3},0}, {{3,3},1}, {{4,3},0}, {{5,3},0},
                                 {{1,4},0}, {{2,4},0}, {{3,4},1}, {{4,4},0}, {{5,4},0},
@@ -152,8 +152,8 @@ evolve_blinker_test() ->
                                 {{1,4},0}, {{2,4},0}, {{3,4},1}, {{4,4},0}, {{5,4},0},
                                 {{1,5},0}, {{2,5},0}, {{3,5},0}, {{4,5},0}, {{5,5},0} ]),
 
-  SecondGeneration = game:evolve(FirstGeneration),
-  ThirdGeneration = game:evolve(SecondGeneration),
+  SecondGeneration = egol_game:evolve(FirstGeneration),
+  ThirdGeneration = egol_game:evolve(SecondGeneration),
   {ActualSecondGrid,_,_} = SecondGeneration,
   {ActualThirdGrid,_,_} = ThirdGeneration,
 
@@ -162,27 +162,27 @@ evolve_blinker_test() ->
 
 
 neighbors_test() ->
-  Board = game:init([ {{1,1},1}, {{2,1},0}, {{3,1},1}, {{4,1},0},
+  Board = egol_game:init([ {{1,1},1}, {{2,1},0}, {{3,1},1}, {{4,1},0},
                       {{1,2},0}, {{2,2},1}, {{3,2},1}, {{4,2},0},
                       {{1,3},0}, {{2,3},0}, {{3,3},1}, {{4,3},0},
                       {{1,4},1}, {{2,4},0}, {{3,4},1}, {{4,4},0} ]),
 
-  ?assertEqual(2, game:neighbors({1,1}, Board)),
-  ?assertEqual(3, game:neighbors({3,1}, Board)),
-  ?assertEqual(5, game:neighbors({4,1}, Board)),
-  ?assertEqual(4, game:neighbors({2,2}, Board)),
-  ?assertEqual(3, game:neighbors({3,2}, Board)),
-  ?assertEqual(5, game:neighbors({2,3}, Board)),
-  ?assertEqual(3, game:neighbors({3,3}, Board)),
-  ?assertEqual(1, game:neighbors({1,4}, Board)),
-  ?assertEqual(5, game:neighbors({4,4}, Board)).
+  ?assertEqual(2, egol_game:neighbors({1,1}, Board)),
+  ?assertEqual(3, egol_game:neighbors({3,1}, Board)),
+  ?assertEqual(5, egol_game:neighbors({4,1}, Board)),
+  ?assertEqual(4, egol_game:neighbors({2,2}, Board)),
+  ?assertEqual(3, egol_game:neighbors({3,2}, Board)),
+  ?assertEqual(5, egol_game:neighbors({2,3}, Board)),
+  ?assertEqual(3, egol_game:neighbors({3,3}, Board)),
+  ?assertEqual(1, egol_game:neighbors({1,4}, Board)),
+  ?assertEqual(5, egol_game:neighbors({4,4}, Board)).
 
 
 state_test() ->
-  Board = game:init([{{1,1},1},{{2,1},0},{{1,2},0},{{2,2},1}]),
-  ?assertEqual(1, game:state({1,1}, Board)),
-  ?assertEqual(0, game:state({2,1}, Board)),
-  ?assertEqual(0, game:state({1,2}, Board)),
-  ?assertEqual(1, game:state({2,2}, Board)),
-  ?assertEqual(1, game:state({1,3}, Board)),
-  ?assertEqual(0, game:state({3,2}, Board)).
+  Board = egol_game:init([{{1,1},1},{{2,1},0},{{1,2},0},{{2,2},1}]),
+  ?assertEqual(1, egol_game:state({1,1}, Board)),
+  ?assertEqual(0, egol_game:state({2,1}, Board)),
+  ?assertEqual(0, egol_game:state({1,2}, Board)),
+  ?assertEqual(1, egol_game:state({2,2}, Board)),
+  ?assertEqual(1, egol_game:state({1,3}, Board)),
+  ?assertEqual(0, egol_game:state({3,2}, Board)).

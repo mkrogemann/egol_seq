@@ -1,4 +1,4 @@
--module (rules).
+-module (egol_rules).
 
 -export ([evaluate/2]).
 

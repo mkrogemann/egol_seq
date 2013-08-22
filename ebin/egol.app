@@ -5,4 +5,4 @@
               {applications,[kernel,stdlib]},
               {mod,{egol_app,[]}},
               {env,[]},
-              {modules,[egol_app,egol_sup,game,rules]}]}.
+              {modules,[egol_app,egol_game,egol_rules,egol_sup]}]}.
