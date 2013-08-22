@@ -1,4 +1,4 @@
--module(erlgol_sup).
+-module(egol_sup).
 
 -behaviour(supervisor).
 

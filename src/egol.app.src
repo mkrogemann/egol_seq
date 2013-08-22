@@ -1,12 +1,12 @@
-{application, erlgol,
+{application, egol,
  [
   {description, ""},
-  {vsn, "0.1.0"},
+  {vsn, "0.2.0"},
   {registered, []},
   {applications, [
                   kernel,
                   stdlib
                  ]},
-  {mod, { erlgol_app, []}},
+  {mod, { egol_app, []}},
   {env, []}
  ]}.

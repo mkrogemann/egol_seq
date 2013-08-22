@@ -1,8 +1,0 @@
-{application,erlgol,
-             [{description,[]},
-              {vsn,"0.1.0"},
-              {registered,[]},
-              {applications,[kernel,stdlib]},
-              {mod,{erlgol_app,[]}},
-              {env,[]},
-              {modules,[erlgol_app,erlgol_sup,game,rules]}]}.

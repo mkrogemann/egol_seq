@@ -1,4 +1,4 @@
--module(erlgol_app).
+-module(egol_app).
 
 -behaviour(application).
 
@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    erlgol_sup:start_link().
+    egol_sup:start_link().
 
 stop(_State) ->
     ok.
