@@ -1,7 +1,6 @@
 -module (egol_game).
 
--export ([init/1]).
--export ([evolve/1]).
+-export ([init_from_list/1, evolve/1, init_from_file/1]).
 
 %% Export all functions for unit tests
 -ifdef(TEST).
@@ -10,20 +9,24 @@
 
 %%--------------------------------------------------------------------
 %% @doc
-%% init takes one List argument which represents the Game's state.
+%% init_from_list takes one List argument which represents the Game's state.
 %% From this list it constructs the Game's Board plus some meta
 %% information, namely Width and Height of the Game's Board.
-%% @spec init(List) -> Board
+%% @spec init_from_list(List) -> Board
 %%       List = [ {{ integer(), integer() }, integer() } ]
 %% @TODO Document Board once I grasp EDoc
 %% @end
 %%--------------------------------------------------------------------
-init(L) ->
+init_from_list(L) ->
   Grid = dict:from_list(L),
   Points = dict:fetch_keys(Grid),
   XCoords = [X || {X,_} <- Points],
   YCoords = [Y || {_,Y} <- Points],
   Board = {Grid, lists:max(XCoords), lists:max(YCoords)},
+  Board.
+
+init_from_file(File) ->
+  Board = egol_file:load_game(File),
   Board.
 
 
