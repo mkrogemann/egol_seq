@@ -14,4 +14,5 @@ What's next?
 * Alternative data structures (gb_tree, bit vector, ...)
 * Benchmarking
 * More tools (dyalizer, ...)
-* Concurrency (cell = actor?)
+* Concurrency (cell == process?) -> each cell would need to figure out how to ask its neighbors for their states. Also must not switch to new value immediately but only after all cells have computed new state, then all switch at once.
+
