@@ -4,3 +4,6 @@ deps
 *.beam
 *.plt
 doc
+.DS_Store
+.*.swp
+
