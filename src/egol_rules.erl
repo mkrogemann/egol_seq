@@ -1,6 +1,6 @@
--module (egol_rules).
+-module(egol_rules).
 
--export ([evaluate/2]).
+-export([evaluate/2]).
 
 %%--------------------------------------------------------------------
 %% @doc
