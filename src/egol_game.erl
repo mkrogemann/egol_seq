@@ -1,6 +1,6 @@
--module (egol_game).
+-module(egol_game).
 
--export ([init_from_list/1, evolve/1, init_from_file/1]).
+-export([init_from_list/1, evolve/1, init_from_file/1]).
 
 %% Export all functions for unit tests
 -ifdef(TEST).
@@ -18,16 +18,16 @@
 %% @end
 %%--------------------------------------------------------------------
 init_from_list(L) ->
-  Grid = dict:from_list(L),
-  Points = dict:fetch_keys(Grid),
-  XCoords = [X || {X,_} <- Points],
-  YCoords = [Y || {_,Y} <- Points],
-  Board = {Grid, lists:max(XCoords), lists:max(YCoords)},
-  Board.
+    Grid = dict:from_list(L),
+    Points = dict:fetch_keys(Grid),
+    XCoords = [X || {X,_} <- Points],
+    YCoords = [Y || {_,Y} <- Points],
+    Board = {Grid, lists:max(XCoords), lists:max(YCoords)},
+    Board.
 
 init_from_file(File) ->
-  Board = egol_file:load_game(File),
-  Board.
+    Board = egol_file:load_game(File),
+    Board.
 
 
 %%--------------------------------------------------------------------
@@ -39,10 +39,10 @@ init_from_file(File) ->
 %% @end
 %%--------------------------------------------------------------------
 evolve(Board) ->
-  {Grid,Width,Height} = Board,
-  NewGrid = dict:map(fun(K,V) ->
-    egol_rules:evaluate(neighbors(K, Board), V) end, Grid),
-  {NewGrid,Width,Height}.
+    {Grid,Width,Height} = Board,
+    NewGrid = dict:map(fun(K,V) ->
+                egol_rules:evaluate(neighbors(K, Board), V) end, Grid),
+    {NewGrid,Width,Height}.
 
 
 %%--------------------------------------------------------------------
@@ -58,11 +58,11 @@ evolve(Board) ->
 %% @end
 %%--------------------------------------------------------------------
 neighbors(Cell, Board) ->
-  {X,Y} = Cell,
-  lists:sum(
-    [state({X-1,Y-1}, Board), state({X-1,Y}, Board), state({X-1,Y+1}, Board),
-     state({X,  Y-1}, Board),                        state({X,  Y+1}, Board),
-     state({X+1,Y-1}, Board), state({X+1,Y}, Board), state({X+1,Y+1}, Board)]).
+    {X,Y} = Cell,
+    lists:sum(
+        [state({X-1,Y-1},Board), state({X-1,Y},Board), state({X-1,Y+1},Board),
+         state({X,  Y-1},Board),                       state({X,  Y+1},Board),
+         state({X+1,Y-1},Board), state({X+1,Y},Board), state({X+1,Y+1},Board)]).
 
 
 %%--------------------------------------------------------------------
@@ -74,10 +74,10 @@ neighbors(Cell, Board) ->
 %% @end
 %%--------------------------------------------------------------------
 state(Cell, Board) ->
-  {Grid,_,_} = Board,
-  {X,Y} = wrap_if_required(Cell, Board),
-  {ok,Value} = dict:find({X,Y}, Grid),
-  Value.
+    {Grid,_,_} = Board,
+    {X,Y} = wrap_if_required(Cell, Board),
+    {ok,Value} = dict:find({X,Y}, Grid),
+    Value.
 
 
 %%--------------------------------------------------------------------
@@ -90,14 +90,15 @@ state(Cell, Board) ->
 %% @end
 %%--------------------------------------------------------------------
 wrap_if_required(Cell, Board) ->
-  {X,Y} = Cell,
-  {_,Width,Height} = Board,
-  XWrapped = if X > Width -> 1
-    ; X < 1 -> Width
-    ; true -> X
-  end,
-  YWrapped = if Y > Height -> 1
-    ; Y < 1 -> Height
-    ; true -> Y
-  end,
-  {XWrapped,YWrapped}.
+    {X,Y} = Cell,
+    {_,Width,Height} = Board,
+    XWrapped = if X > Width -> 1
+            ; X < 1 -> Width
+            ; true -> X
+    end,
+    YWrapped = if Y > Height -> 1
+            ; Y < 1 -> Height
+            ; true -> Y
+    end,
+    {XWrapped,YWrapped}.
+
