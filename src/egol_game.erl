@@ -1,6 +1,8 @@
 -module(egol_game).
 
--export([init_from_list/1, evolve/1, init_from_file/1]).
+-export([init_from_list/1,
+         evolve/1,
+         init_from_file/1]).
 
 %% Export all functions for unit tests
 -ifdef(TEST).
