@@ -6,4 +6,4 @@
               {mod,{egol_app,[]}},
               {env,[]},
               {modules,[egol_app,egol_file,egol_game,egol_print,egol_rules,
-                        egol_sup]}]}.
+                        egol_runner,egol_sup]}]}.
