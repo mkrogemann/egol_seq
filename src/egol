@@ -1,0 +1,14 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+%%! -pa ebin -smp enable -sname egol
+main([]) ->
+    execute(60, 30, 200).
+
+usage() ->
+    io:format("usage: egol Width Height Generations\n"),
+    halt(1).
+
+execute(Width, Height, Generations) ->
+    Board = egol_runner:random_start(Width, Height),
+    egol_runner:next_gen(Board, 0, Generations).
+
