@@ -6,4 +6,4 @@ deps
 doc
 .DS_Store
 .*.swp
-
+.rebar
